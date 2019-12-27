@@ -1,4 +1,4 @@
-# minimal-flask-react
+# Software-HR
 
 Based on https://github.com/rwieruch/minimal-react-webpack-babel-setup
 

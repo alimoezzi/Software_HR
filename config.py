@@ -3,7 +3,7 @@ class BaseConfig(object):
 
     ORIGINS = ["*"]
     SECRET_KEY = '4)-.W\xad\x80\x97`\x8e\xc1\xcd\x10\xd7\x11\xd6\x00\xf7M\x89\x18\xceCg'
-    APPNAME = "OpenMonitoringDev"
+    APPNAME = "Software_HR"
     JWT_ACCESS_LIFESPAN = {'hours': 24}
     JWT_REFRESH_LIFESPAN = {'days': 1}
     JWT_HEADER_NAME = 'authx'

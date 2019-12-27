@@ -281,3 +281,4 @@ fabric.properties
 /.idea/inspectionProfiles/Project_Default.xml
 /.idea/dataSources.xml
 /.idea/terminal.xml
+/.idea/*
