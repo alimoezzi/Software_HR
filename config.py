@@ -18,7 +18,7 @@ class Development(BaseConfig):
     DEBUG = True
     TESTING = False
     ENV = 'dev'
-    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@@localhost:5432/school'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@@localhost:5432/software_hr'
 
 
 class Production(BaseConfig):
@@ -28,7 +28,7 @@ class Production(BaseConfig):
     DEBUG = False
     TESTING = False
     ENV = 'production'
-    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@@localhost:5432/school'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@@localhost:5432/software_hr'
 
 
 class Testing(BaseConfig):
