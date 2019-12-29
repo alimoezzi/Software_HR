@@ -1,4 +1,4 @@
-image: bopen/ubuntu-pyenv
+image: paradoxxxzero/python-node-yarn-postgresql
 
 stages:
   - ver
@@ -20,9 +20,6 @@ init:
   stage: init
   script:
     - apt-get update && apt-get install -y gnupg2
-    - apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
-    - echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" > /etc/apt/sources.list.d/pgdg.list
-    - apt-get update && apt-get install -y software-properties-common postgresql-10 postgresql-client-10 postgresql-contrib-10 postgresql-server-dev-10
     - apt-get install libffi6 libffi-dev
     - pip3 install psycopg2-binary
     - pip3 install gunicorn
@@ -32,16 +29,10 @@ run_tests:
   stage: tests
   script:
     - apt-get update && apt-get install -y gnupg2
-    - apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
-    - echo "deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main" > /etc/apt/sources.list.d/pgdg.list
-    - docker-compose port app 5432
-    - apt-get update && apt-get install -y software-properties-common postgresql-10 postgresql-client-10 postgresql-contrib-10 postgresql-server-dev-10
     - apt-get install libffi6 libffi-dev
     - pip3 install psycopg2-binary
     - pip3 install gunicorn
     - pip3 install -r requirements.txt
-    - echo "host all  all    0.0.0.0/0  md5" >> /etc/postgresql/10/main/pg_hba.conf
-    - echo "listen_addresses='*'" >> /etc/postgresql/10/main/postgresql.conf
     - export ENV=test
     - flask db upgrade
     - python tests.py
