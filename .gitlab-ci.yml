@@ -1,4 +1,4 @@
-image: rbekker87/build-tools:latest
+image: archiconda/archiconda3:latest
 
 stages:
   - ver
