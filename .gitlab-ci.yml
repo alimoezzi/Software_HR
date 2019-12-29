@@ -1,4 +1,4 @@
-image: soulcore/postgresql-postgis
+image: brusmx/postgresql-python-sample
 
 stages:
   - ver
