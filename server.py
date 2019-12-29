@@ -14,6 +14,7 @@ with app.app_context():
             u = User(
                 username='admin',
                 password='admin',
+                email='test@example.com',
                 roles='admin',
                 is_active=True
             )

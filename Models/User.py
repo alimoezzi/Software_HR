@@ -1,7 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy_utils.types import ChoiceType
 from Models.Models import db, guard
-from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 
 
@@ -11,15 +9,17 @@ class User(db.Model):
     # firstname = db.Column(db.String(50), nullable=False)
     # lastname = db.Column(db.String(50), nullable=False)
     username = db.Column(db.String(50), nullable=False,unique=True)
+    email = db.Column(db.String(50), nullable=False,unique=True)
     password = db.Column(db.String(500), nullable=False)
     joined = db.Column(db.DateTime())
     roles = db.Column(db.String(50))
     is_active = db.Column(db.Boolean, default=True, server_default='true')
 
-    def __init__(self, username: str, password: str,roles: str,is_active: bool):
+    def __init__(self, username: str, password: str, email: str,roles: str,is_active: bool):
         # self.firstname = firstname.title()
         # self.lastname = lastname.title()
         self.username = username.lower()
+        self.email = email.lower()
         self.joined = datetime.now()
         self.password = guard.hash_password(password)
         self.roles = roles
