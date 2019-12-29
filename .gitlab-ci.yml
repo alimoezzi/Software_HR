@@ -22,7 +22,6 @@ ver:
     - wget https://bootstrap.pypa.io/get-pip.py
     - python3.6 get-pip.py
     - ln -s /usr/bin/python3.6 /usr/local/bin/python3
-    - ln -s /usr/local/bin/pip /usr/local/bin/pip3
     - python --version
     - whoami
 
@@ -46,7 +45,6 @@ init:
     - wget https://bootstrap.pypa.io/get-pip.py
     - python3.6 get-pip.py
     - ln -s /usr/bin/python3.6 /usr/local/bin/python3
-    - ln -s /usr/local/bin/pip /usr/local/bin/pip3
     - pip3 install psycopg2-binary
     - pip3 install gunicorn
     - pip3 install -r requirements.txt
@@ -67,7 +65,6 @@ run_tests:
     - wget https://bootstrap.pypa.io/get-pip.py
     - python3.6 get-pip.py
     - ln -s /usr/bin/python3.6 /usr/local/bin/python3
-    - ln -s /usr/local/bin/pip /usr/local/bin/pip3
     - pip3 install psycopg2-binary
     - pip3 install gunicorn
     - pip3 install -r requirements.txt
