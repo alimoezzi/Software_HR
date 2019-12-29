@@ -1,4 +1,4 @@
-image: archiconda/archiconda3:latest
+image: lessandroadamo/ubuntu-ds-python3
 
 stages:
   - ver
