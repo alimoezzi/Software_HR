@@ -587,7 +587,9 @@ class Praetorian:
         """
         Unpacks a jwt token from a request header
         """
-        jwt_header = headers.get(self.header_name).split(',')[0]
+        jwt_header = headers.get(self.header_name)
+        if jwt_header:
+            jwt_header = jwt_header.split(',')[0]
         MissingTokenHeader.require_condition(
             jwt_header is not None,
             "JWT token not found in headers under '{}'",
