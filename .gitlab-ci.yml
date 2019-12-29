@@ -1,4 +1,4 @@
-image: paradoxxxzero/python-node-yarn-postgresql
+image: soulcore/postgresql-postgis
 
 stages:
   - ver
