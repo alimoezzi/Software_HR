@@ -26,12 +26,16 @@ run_tests:
     - pip install psycopg2-binary
     - pip install -r requirements.txt
     - export ENV=test
+    - export FLASK_APP=server
+    - flask db upgrade
     - python tests.py
 
 deploy_staging:
   stage: deploy
   script:
     - export ENV=heroku
+    - export FLASK_APP=server
+    - flask db upgrade
     - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/software-hr.git
     - git push heroku master
     - echo "Deployed to Staging Server https://software-hr.herokuapp.com/"
@@ -45,6 +49,8 @@ deploy_production:
   stage: deploy
   script:
     - export ENV=heroku
+    - export FLASK_APP=server
+    - flask db upgrade
     - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/software-hr.git
     - git push heroku master
     - echo "Deployed to Production Server https://software-hr.herokuapp.com/"
