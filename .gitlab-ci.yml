@@ -13,7 +13,7 @@ ver:
     - apt-get -yq update && apt-get install -y gnupg2
     - apt-get -yq install libffi6 libffi-dev
     - apt-get -yq install software-properties-common git curl
-    - add-apt-repository ppa:jonathonf/python-3.6 -y
+    - add-apt-repository ppa:deadsnakes/ppa -y
     - apt-get -yq update
     - apt-get -yq install wget
     - apt-get -yq install python3.6
@@ -37,7 +37,7 @@ init:
     - apt-get -yq update && apt-get install -y gnupg2
     - apt-get -yq install libffi6 libffi-dev
     - apt-get -yq install software-properties-common git curl
-    - add-apt-repository ppa:jonathonf/python-3.6 -y
+    - add-apt-repository ppa:deadsnakes/ppa -y
     - apt-get -yq update
     - apt-get -yq install wget
     - apt-get -yq install python3.6
@@ -58,7 +58,7 @@ run_tests:
     - apt-get -yq update && apt-get install -y gnupg2
     - apt-get -yq install libffi6 libffi-dev
     - apt-get -yq install software-properties-common git curl
-    - add-apt-repository ppa:jonathonf/python-3.6 -y
+    - add-apt-repository ppa:deadsnakes/ppa -y
     - apt-get -yq update
     - apt-get -yq install wget
     - apt-get -yq install python3.6
