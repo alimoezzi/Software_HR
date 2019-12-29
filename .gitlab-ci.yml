@@ -33,6 +33,8 @@ variables:
 init:
   stage: init
   script:
+    - locale-gen en_US.UTF-8
+    - export LANGUAGE en_US:en
     - export LC_CTYPE=en_US.UTF-8
     - export LANG=en_US.UTF-8
     - export DEBIAN_FRONTEND=noninteractive
@@ -56,6 +58,8 @@ init:
 run_tests:
   stage: tests
   script:
+    - locale-gen en_US.UTF-8
+    - export LANGUAGE en_US:en
     - export LC_CTYPE=en_US.UTF-8
     - export LANG=en_US.UTF-8
     - export DEBIAN_FRONTEND=noninteractive
