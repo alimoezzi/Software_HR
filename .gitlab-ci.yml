@@ -20,6 +20,7 @@ init:
   stage: init
   script:
     - apk add postgresql-dev --no-cache
+    - apt-get install libffi6 libffi-dev
     - pip install psycopg2-binary
     - pip install -r requirements.txt
 
