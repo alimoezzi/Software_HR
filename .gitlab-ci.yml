@@ -1,4 +1,4 @@
-image: brusmx/postgresql-python-sample
+image: jsanchezislas/ubuntupython
 
 stages:
   - ver
