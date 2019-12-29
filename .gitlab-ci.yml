@@ -1,4 +1,4 @@
-image: jsanchezislas/ubuntupython
+image: aukhan/postgresql
 
 stages:
   - ver
@@ -22,6 +22,15 @@ init:
     - export DEBIAN_FRONTEND=noninteractive
     - apt-get -yq update && apt-get install -y gnupg2
     - apt-get -yq install libffi6 libffi-dev
+    - add-apt-repository ppa:jonathonf/python-3.6 -y
+    - apt-get -yq update
+    - apt-get -yq install python3.6
+    - apt-get -yq install python3.6-dev
+    - apt-get -yq install python3.6-venv
+    - wget https://bootstrap.pypa.io/get-pip.py
+    - sudo python3.6 get-pip.py
+    - ln -s /usr/bin/python3.6 /usr/local/bin/python3
+    - ln -s /usr/local/bin/pip /usr/local/bin/pip3
     - pip3 install psycopg2-binary
     - pip3 install gunicorn
     - pip3 install -r requirements.txt
@@ -32,6 +41,15 @@ run_tests:
     - export DEBIAN_FRONTEND=noninteractive
     - apt-get -yq update && apt-get install -y gnupg2
     - apt-get -yq install libffi6 libffi-dev
+    - add-apt-repository ppa:jonathonf/python-3.6 -y
+    - apt-get -yq update
+    - apt-get -yq install python3.6
+    - apt-get -yq install python3.6-dev
+    - apt-get -yq install python3.6-venv
+    - wget https://bootstrap.pypa.io/get-pip.py
+    - sudo python3.6 get-pip.py
+    - ln -s /usr/bin/python3.6 /usr/local/bin/python3
+    - ln -s /usr/local/bin/pip /usr/local/bin/pip3
     - pip3 install psycopg2-binary
     - pip3 install gunicorn
     - pip3 install -r requirements.txt
