@@ -39,7 +39,7 @@ init:
     - apt-get -yq install software-properties-common git curl
     - add-apt-repository ppa:deadsnakes/ppa -y
     - apt-get -yq update
-    - apt-get -yq install wget
+    - apt-get -yq install wget postgresql-server-dev-10
     - apt-get -yq install python3.6
     - apt-get -yq install python3.6-dev
     - apt-get -yq install python3.6-venv
@@ -60,7 +60,7 @@ run_tests:
     - apt-get -yq install software-properties-common git curl
     - add-apt-repository ppa:deadsnakes/ppa -y
     - apt-get -yq update
-    - apt-get -yq install wget
+    - apt-get -yq install wget postgresql-server-dev-10
     - apt-get -yq install python3.6
     - apt-get -yq install python3.6-dev
     - apt-get -yq install python3.6-venv
