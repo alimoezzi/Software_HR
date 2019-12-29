@@ -21,7 +21,7 @@ init:
   script:
     - apt-get update && apt-get install -y gnupg2
     - apt-get update
-    - apt-get postgresql postgresql-contrib postgresql-server-dev-12
+    - apt-get postgresql postgresql-contrib postgresql-server-dev-10
     - apt-get install libffi6 libffi-dev
     - pip3 install psycopg2-binary
     - pip3 install gunicorn
@@ -32,7 +32,7 @@ run_tests:
   script:
     - apt-get update && apt-get install -y gnupg2
     - apt-get update
-    - apt-get postgresql postgresql-contrib postgresql-server-dev-12
+    - apt-get postgresql postgresql-contrib postgresql-server-dev-10
     - apt-get install libffi6 libffi-dev
     - pip3 install psycopg2-binary
     - pip3 install gunicorn
