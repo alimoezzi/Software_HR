@@ -33,11 +33,13 @@ variables:
 init:
   stage: init
   script:
-    - locale-gen en_US.UTF-8
-    - export LANGUAGE en_US:en
-    - export LC_CTYPE=en_US.UTF-8
-    - export LANG=en_US.UTF-8
     - export DEBIAN_FRONTEND=noninteractive
+    - apt-get -yq update --fix-missing && apt-get -yq install locales
+    - export LANG=en_US.UTF-8
+    - export LC_CTYPE=en_US.UTF-8
+    - export LANGUAGE=en_US:en
+    - export LC_ALL=en_US.UTF-8
+    - locale-gen en_US.UTF-8
     - apt-get -yq update && apt-get install -y gnupg2
     - apt-get -yq install libffi6 libffi-dev
     - apt-get -yq install software-properties-common git curl
@@ -58,11 +60,13 @@ init:
 run_tests:
   stage: tests
   script:
-    - locale-gen en_US.UTF-8
-    - export LANGUAGE en_US:en
-    - export LC_CTYPE=en_US.UTF-8
-    - export LANG=en_US.UTF-8
     - export DEBIAN_FRONTEND=noninteractive
+    - apt-get -yq update --fix-missing && apt-get -yq install locales
+    - export LANG=en_US.UTF-8
+    - export LC_CTYPE=en_US.UTF-8
+    - export LANGUAGE=en_US:en
+    - export LC_ALL=en_US.UTF-8
+    - locale-gen en_US.UTF-8
     - apt-get -yq update && apt-get install -y gnupg2
     - apt-get -yq install libffi6 libffi-dev
     - apt-get -yq install software-properties-common git curl
