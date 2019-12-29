@@ -11,7 +11,6 @@ with app.app_context():
     try:
         u = User.query.filter_by(username='admin').first()
         if not u:
-            db.create_all()
             u = User(
                 username='admin',
                 password='admin',
