@@ -1,4 +1,4 @@
-image: lessandroadamo/ubuntu-ds-python3
+image: bopen/ubuntu-pyenv
 
 stages:
   - ver
