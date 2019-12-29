@@ -19,8 +19,9 @@ variables:
 init:
   stage: init
   script:
-    - apt-get update && apt-get install -y gnupg2
-    - apt-get install libffi6 libffi-dev
+    - export DEBIAN_FRONTEND=noninteractive
+    - apt-get -yq update && apt-get install -y gnupg2
+    - apt-get -yq install libffi6 libffi-dev
     - pip3 install psycopg2-binary
     - pip3 install gunicorn
     - pip3 install -r requirements.txt
@@ -28,11 +29,13 @@ init:
 run_tests:
   stage: tests
   script:
-    - apt-get update && apt-get install -y gnupg2
-    - apt-get install libffi6 libffi-dev
+    - export DEBIAN_FRONTEND=noninteractive
+    - apt-get -yq update && apt-get install -y gnupg2
+    - apt-get -yq install libffi6 libffi-dev
     - pip3 install psycopg2-binary
     - pip3 install gunicorn
     - pip3 install -r requirements.txt
+    - psql -c 'create database software_hr;'
     - export ENV=test
     - flask db upgrade
     - python tests.py
