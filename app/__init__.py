@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template
 from flask_cors import CORS, cross_origin
 from flask_migrate import Migrate
+from flask_heroku import Heroku
 from Models import db, guard
 from Models import User
 from utils import tampared
@@ -23,6 +24,7 @@ class create_app():
     app = Flask(__name__)
     cors = CORS(app)
     migrate = Migrate(app, db)
+    heroku = Heroku(app)
     def __init__(self):
         env = os.getenv("ENV")
         self.app.config.from_object(config.get(env))
