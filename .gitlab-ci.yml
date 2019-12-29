@@ -12,10 +12,10 @@ ver:
     - export DEBIAN_FRONTEND=noninteractive
     - apt-get -yq update && apt-get install -y gnupg2
     - apt-get -yq install libffi6 libffi-dev
-    - apt-get -yq software-properties-common git curl
+    - apt-get -yq install software-properties-common git curl
     - add-apt-repository ppa:jonathonf/python-3.6 -y
     - apt-get -yq update
-    - apt-get -yq wget
+    - apt-get -yq install wget
     - apt-get -yq install python3.6
     - apt-get -yq install python3.6-dev
     - apt-get -yq install python3.6-venv
@@ -36,10 +36,10 @@ init:
     - export DEBIAN_FRONTEND=noninteractive
     - apt-get -yq update && apt-get install -y gnupg2
     - apt-get -yq install libffi6 libffi-dev
-    - apt-get -yq software-properties-common git curl
+    - apt-get -yq install software-properties-common git curl
     - add-apt-repository ppa:jonathonf/python-3.6 -y
     - apt-get -yq update
-    - apt-get -yq wget
+    - apt-get -yq install wget
     - apt-get -yq install python3.6
     - apt-get -yq install python3.6-dev
     - apt-get -yq install python3.6-venv
@@ -57,10 +57,10 @@ run_tests:
     - export DEBIAN_FRONTEND=noninteractive
     - apt-get -yq update && apt-get install -y gnupg2
     - apt-get -yq install libffi6 libffi-dev
-    - apt-get -yq software-properties-common git curl
+    - apt-get -yq install software-properties-common git curl
     - add-apt-repository ppa:jonathonf/python-3.6 -y
     - apt-get -yq update
-    - apt-get -yq wget
+    - apt-get -yq install wget
     - apt-get -yq install python3.6
     - apt-get -yq install python3.6-dev
     - apt-get -yq install python3.6-venv
