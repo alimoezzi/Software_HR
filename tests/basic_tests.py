@@ -12,7 +12,7 @@ class TestFlaskApi(unittest.TestCase):
         self.app_context.push()
 
     def test_hello_world(self):
-        response = self.app.get('/')
+        response = self.app.get('/about')
         self.assertEqual(
             json.loads(response.get_data().decode(sys.getdefaultencoding())),
             {"message": "ok"}

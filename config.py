@@ -38,7 +38,7 @@ class Testing(BaseConfig):
     DEBUG = False
     TESTING = True
     ENV = 'testing'
-    # SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@@localhost:5432/school'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@@localhost:5432/school'
 
 
 class Heroku(BaseConfig):
