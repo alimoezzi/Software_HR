@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template,jsonify
 from app import *
 
 main = Blueprint('main', __name__,template_folder='../../templates')
@@ -10,6 +10,6 @@ def index():
     return render_template('main/index.html')
 
 
-@main.route('/about')
+@main.route('/status')
 def about():
-    return render_template('main/about.html')
+    return jsonify({'message': 'ok'}), 200

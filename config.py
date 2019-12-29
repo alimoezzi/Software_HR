@@ -18,7 +18,8 @@ class Development(BaseConfig):
     DEBUG = True
     TESTING = False
     ENV = 'dev'
-    #SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@@localhost:5432/school'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@@localhost:5432/school'
+
 
 class Production(BaseConfig):
     """ Production config. We use Debug mode false """
@@ -27,4 +28,24 @@ class Production(BaseConfig):
     DEBUG = False
     TESTING = False
     ENV = 'production'
-    #SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@@localhost:5432/school'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@@localhost:5432/school'
+
+
+class Testing(BaseConfig):
+    """ Production config. We use Debug mode false """
+
+    PORT = 8080
+    DEBUG = False
+    TESTING = True
+    ENV = 'testing'
+    # SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@@localhost:5432/school'
+
+
+class Heroku(BaseConfig):
+    """ Production config. We use Debug mode false """
+
+    # PORT = 8080
+    # DEBUG = False
+    # TESTING = True
+    # ENV = 'testing'
+    # SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@@localhost:5432/school'

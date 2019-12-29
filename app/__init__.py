@@ -10,10 +10,13 @@ from utils import tampared
 
 config = {
     "dev": "config.Development",
-    "prod": "config.Production"
+    "prod": "config.Production",
+    "test": "config.Testing",
+    "heroku": "config.Heroku"
 }
 
 blacklist = set()
+
 
 def is_blacklisted(jti):
     return jti in blacklist
