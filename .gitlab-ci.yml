@@ -94,7 +94,7 @@ run_tests:
     - psql -h localhost -U postgres -c 'create database software_hr;'
     - export ENV=test
     - flask db upgrade
-    - python tests.py
+    - python tests/basic_tests.py
 
 deploy_staging:
   stage: deploy

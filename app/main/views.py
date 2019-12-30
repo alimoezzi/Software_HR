@@ -11,5 +11,5 @@ def index():
 
 
 @main.route('/status')
-def about():
+def status():
     return jsonify({'message': 'ok'}), 200
