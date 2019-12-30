@@ -1,4 +1,4 @@
-image: xcgd/postgresql:latest
+image: bitnami/postgresql:10.11.0-ol-7-r48
 
 stages:
   - ver
