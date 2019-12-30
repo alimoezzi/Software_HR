@@ -83,10 +83,11 @@ run_tests:
     - pip3 install psycopg2-binary
     - pip3 install gunicorn
     - pip3 install -r requirements.txt
-    - echo "host all  all    0.0.0.0/0  md5" >> /etc/postgresql/9.6/main/pg_hba.conf
-    - echo "host all  all    localhost  md5" >> /etc/postgresql/9.6/main/pg_hba.conf
     - pg_createcluster 9.6 main
     - service postgresql start
+    - echo "host all  all    0.0.0.0/0  md5" >> /etc/postgresql/9.6/main/pg_hba.conf
+    - echo "host all  all    localhost  md5" >> /etc/postgresql/9.6/main/pg_hba.conf
+    - service postgresql restart
     - export PGPASSWORD='postgres'
     - psql -h localhost -U postgres -c 'create database software_hr;'
     - export ENV=test
