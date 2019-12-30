@@ -84,7 +84,7 @@ run_tests:
     - pip3 install gunicorn
     - pip3 install -r requirements.txt
     - pg_createcluster 9.6 main
-    - service postgresql start
+    - service postgresql start && su postgres -c "psql --command \"ALTER USER postgres with password 'postgres';\" "
     - echo "host all  all    0.0.0.0/0  trust" >> ${PG_HOME}/${PG_VERSION}/main/pg_hba.conf
     - echo "host all  all    localhost  trust" >> ${PG_HOME}/${PG_VERSION}/main/pg_hba.conf
     - echo "host all  all    127.0.0.1/32  trust" >> ${PG_HOME}/${PG_VERSION}/main/pg_hba.conf
@@ -99,8 +99,6 @@ run_tests:
 deploy_staging:
   stage: deploy
   script:
-    - export ENV=heroku
-    - flask db upgrade
     - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/software-hr.git
     - git push heroku master
     - echo "Deployed to Staging Server https://software-hr.herokuapp.com/"
@@ -113,7 +111,6 @@ deploy_staging:
 deploy_production:
   stage: deploy
   script:
-    - flask db upgrade
     - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/software-hr.git
     - git push heroku master
     - echo "Deployed to Production Server https://software-hr.herokuapp.com/"
