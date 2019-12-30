@@ -1,4 +1,4 @@
-image: aukhan/postgresql
+image: xcgd/postgresql:latest
 
 stages:
   - ver
@@ -83,7 +83,6 @@ run_tests:
     - pip3 install psycopg2-binary
     - pip3 install gunicorn
     - pip3 install -r requirements.txt
-    - /usr/bin/psql -> ../share/postgresql-common/pg_wrapper
     - psql -c 'create database software_hr;'
     - export ENV=test
     - flask db upgrade
