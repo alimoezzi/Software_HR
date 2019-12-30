@@ -87,6 +87,7 @@ run_tests:
     - service postgresql start
     - echo "host all  all    0.0.0.0/0  trust" >> ${PG_HOME}/${PG_VERSION}/main/pg_hba.conf
     - echo "host all  all    localhost  trust" >> ${PG_HOME}/${PG_VERSION}/main/pg_hba.conf
+    - echo "local all  all      trust" >> ${PG_HOME}/${PG_VERSION}/main/pg_hba.conf
     - service postgresql restart
     - export PGPASSWORD='postgres'
     - psql -h localhost -U postgres -c 'create database software_hr;'
@@ -111,7 +112,6 @@ deploy_staging:
 deploy_production:
   stage: deploy
   script:
-    - export ENV=heroku
     - flask db upgrade
     - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/software-hr.git
     - git push heroku master
