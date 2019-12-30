@@ -1,4 +1,4 @@
-image: bitnami/postgresql:10.11.0-ol-7-r48
+image: unitygroup/postgresql10-tmp
 
 stages:
   - ver
