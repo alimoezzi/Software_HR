@@ -102,7 +102,7 @@ deploy_staging:
     - export DEBIAN_FRONTEND=noninteractive
     - apt-get -yq update --fix-missing && apt-get -yq install software-properties-common git curl
     - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/software-hr.git
-    - git push heroku master
+    - git push heroku HEAD:master --force
     - echo "Deployed to Staging Server https://software-hr.herokuapp.com/"
   environment:
     name: staging
@@ -116,7 +116,7 @@ deploy_production:
     - export DEBIAN_FRONTEND=noninteractive
     - apt-get -yq update --fix-missing && apt-get -yq install software-properties-common git curl
     - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/software-hr.git
-    - git push heroku master
+    - git push heroku HEAD:master --force
     - echo "Deployed to Production Server https://software-hr.herokuapp.com/"
   environment:
     name: production
