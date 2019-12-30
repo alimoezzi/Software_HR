@@ -83,7 +83,7 @@ run_tests:
     - pip3 install psycopg2-binary
     - pip3 install gunicorn
     - pip3 install -r requirements.txt
-    - psql -c 'create database software_hr;'
+    - service postgresql start && psql -h localhost -c 'create database software_hr;'
     - export ENV=test
     - flask db upgrade
     - python tests.py
