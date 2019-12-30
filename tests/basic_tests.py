@@ -7,9 +7,7 @@ import sys
 
 class TestFlaskApi(unittest.TestCase):
     def setUp(self):
-        self.app = create_app().app
-        self.app_context = self.app.app_context()
-        self.app_context.push()
+        self.app = create_app().app.test_client()
 
     def test_hello_world(self):
         response = self.app.get('/status')
