@@ -85,6 +85,7 @@ run_tests:
     - pip3 install -r requirements.txt
     - pg_createcluster 9.6 main
     - service postgresql start
+    - export PGPASSWORD='postgres'
     - psql -h localhost -c 'create database software_hr;'
     - export ENV=test
     - flask db upgrade
