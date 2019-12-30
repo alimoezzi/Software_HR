@@ -12,6 +12,7 @@ flask-heroku==0.1.9
 Flask-Mail==0.9.1
 Flask-Migrate==2.5.2
 Flask-SQLAlchemy==2.4.0
+gunicorn==20.0.4
 humanfriendly==4.18
 itsdangerous==1.1.0
 Jinja2==2.10.1
