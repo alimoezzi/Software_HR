@@ -72,7 +72,7 @@ run_tests:
     - apt-get -yq install software-properties-common git curl
     - add-apt-repository ppa:deadsnakes/ppa -y
     - apt-get -yq update
-    - apt-get -yq install wget postgresql-server-dev-10
+    - apt-get -yq install wget postgresql-server-dev-all
     - apt-get -yq install python3.6
     - apt-get -yq install python3.6-dev
     - apt-get -yq install python3.6-venv
@@ -83,7 +83,9 @@ run_tests:
     - pip3 install psycopg2-binary
     - pip3 install gunicorn
     - pip3 install -r requirements.txt
-    - service postgresql start && psql -h localhost -c 'create database software_hr;'
+    - pg_createcluster 9.6 main
+    - service postgresql start
+    - psql -h localhost -c 'create database software_hr;'
     - export ENV=test
     - flask db upgrade
     - python tests.py
