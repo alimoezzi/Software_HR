@@ -46,7 +46,7 @@ init:
     - add-apt-repository ppa:deadsnakes/ppa -y
     - apt-get -yq update
     - apt-get -yq install wget postgresql-server-dev-all
-    - apt-get -yq install python3.6
+    - apt-get -yq install python3.6 redis-server
     - apt-get -yq install python3.6-dev
     - apt-get -yq install python3.6-venv
     - wget https://bootstrap.pypa.io/get-pip.py
@@ -56,6 +56,8 @@ init:
     - pip3 install psycopg2-binary
     - pip3 install gunicorn
     - pip3 install -r requirements.txt
+    - echo "supervised systemd" >> /etc/redis/redis.conf
+    - systemctl restart redis.service
 
 run_tests:
   stage: tests
@@ -73,7 +75,7 @@ run_tests:
     - add-apt-repository ppa:deadsnakes/ppa -y
     - apt-get -yq update
     - apt-get -yq install wget postgresql-server-dev-all
-    - apt-get -yq install python3.6
+    - apt-get -yq install python3.6 redis-server
     - apt-get -yq install python3.6-dev
     - apt-get -yq install python3.6-venv
     - wget https://bootstrap.pypa.io/get-pip.py
@@ -95,6 +97,8 @@ run_tests:
     - export ENV=test
     - flask db upgrade
     - python tests/basic_tests.py
+    - echo "supervised systemd" >> /etc/redis/redis.conf
+    - systemctl restart redis.service
 
 deploy_staging:
   stage: deploy
