@@ -3,8 +3,11 @@ from flask import Flask, render_template
 from flask_cors import CORS, cross_origin
 from flask_migrate import Migrate
 from flask_heroku import Heroku
+from flask_script import Manager, Shell
 from Models import db, guard
 from Models import User
+import redis
+from rq import Worker, Queue, Connection
 from utils import tampared
 
 
@@ -22,18 +25,19 @@ def is_blacklisted(jti):
     return jti in blacklist
 
 
-
 class create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, root_path=os.path.abspath(os.path.join(".")))
     cors = CORS(app)
     migrate = Migrate(app, db)
     heroku = Heroku(app)
+    env = os.getenv("ENV")
+    app.config.from_object(config.get(env))
+    db.init_app(app)
+    guard.init_app(app, User, is_blacklisted=is_blacklisted)
+    conn = redis.from_url(app.config['REDIS_URL'])
+    q = Queue(connection=conn)
+    manager = Manager(app)
     def __init__(self):
-        env = os.getenv("ENV")
-        self.app.config.from_object(config.get(env))
-        db.init_app(self.app)
-        guard.init_app(self.app, User, is_blacklisted=is_blacklisted)
-
         ##    # Register Jinja template functions
         ##    from .utils import register_template_utils
         ##    register_template_utils(app)
@@ -54,7 +58,6 @@ class create_app():
         ##    if not app.debug and not app.testing and not app.config['SSL_DISABLE']:
         ##        from flask_sslify import SSLify
         ##        SSLify(app)
-
         # Create app blueprints
         from .main import main as main_blueprint
         self.app.register_blueprint(main_blueprint)

@@ -19,6 +19,8 @@ class Development(BaseConfig):
     TESTING = False
     ENV = 'dev'
     SQLALCHEMY_DATABASE_URI = 'postgres://postgres:postgres@localhost:5432/software_hr'
+    REDIS_URL = 'redis://:8961@localhost:6379/0'
+    listen = ['default']
 
 
 class Production(BaseConfig):
@@ -29,6 +31,8 @@ class Production(BaseConfig):
     TESTING = False
     ENV = 'production'
     SQLALCHEMY_DATABASE_URI = 'postgres://postgres:postgres@localhost:5432/software_hr'
+    REDIS_URL = 'redis://:8961@localhost:6379/0'
+    listen = ['default']
 
 
 class Testing(BaseConfig):
@@ -39,6 +43,8 @@ class Testing(BaseConfig):
     TESTING = True
     ENV = 'testing'
     SQLALCHEMY_DATABASE_URI = 'postgres://postgres:postgres@localhost:5432/software_hr'
+    REDIS_URL = 'redis://:8961@localhost:6379/0'
+    listen = ['default']
 
 
 class Heroku(BaseConfig):
