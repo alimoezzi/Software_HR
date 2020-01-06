@@ -1,4 +1,6 @@
 import os
+from os import environ
+
 from flask import Flask, render_template
 from flask_cors import CORS, cross_origin
 from flask_migrate import Migrate
@@ -34,7 +36,7 @@ class create_app():
     app.config.from_object(config.get(env))
     db.init_app(app)
     guard.init_app(app, User, is_blacklisted=is_blacklisted)
-    conn = redis.from_url(app.config['REDIS_URL'])
+    conn = redis.from_url(environ.get('REDIS_URL', app.config['REDIS_URL']))
     q = Queue(connection=conn)
     manager = Manager(app)
     def __init__(self):
