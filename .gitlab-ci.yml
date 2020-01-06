@@ -57,7 +57,7 @@ init:
     - pip3 install gunicorn
     - pip3 install -r requirements.txt
     - echo "supervised systemd" >> /etc/redis/redis.conf
-    - systemctl restart redis.service
+    - service redis-server restart
 
 run_tests:
   stage: tests
@@ -98,7 +98,7 @@ run_tests:
     - flask db upgrade
     - python tests/basic_tests.py
     - echo "supervised systemd" >> /etc/redis/redis.conf
-    - systemctl restart redis.service
+    - service redis-server restart
 
 deploy_staging:
   stage: deploy
