@@ -1,0 +1,21 @@
+{% extends "job/base.html" %}
+
+{% block con %}
+    <h1 class="title">Job Result</h1>
+    {% for item in items %}
+        <div>
+            <div class="heads">
+                <div>
+                    <h2 class="cap"><a href="/job_res/{{ item.job_id }}">{{ item.job_id }}</a></h2>
+                    <h3 class="cap">{{ item.status }}</h3>
+                </div>
+                <h4 class="datetime cap">{{ item.date.strftime('%b %d, %Y') }}</h4>
+            </div>
+            <hr style="border: 3px solid #333;">
+            <p class="body">
+                {{ item.des }}
+            </p>
+        </div>
+    {% endfor %}
+
+{% endblock %}
