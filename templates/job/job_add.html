@@ -1,0 +1,21 @@
+{% extends "job/base.html" %}
+
+{% block con %}
+    <h1 class="title">Add a job</h1>
+    <form method="post">
+        <label>
+            tasks
+            <select name="func" id="func-select">
+                <option value="">--Please choose an option--</option>
+                {% for foo in func %}
+                    <option value="{{ foo }}">{{ foo }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <label>description<input type="text" name="description"></label>
+        <label>
+            Submit
+            <input type="submit">
+        </label>
+    </form>
+{% endblock %}
