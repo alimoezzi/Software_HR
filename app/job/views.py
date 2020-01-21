@@ -50,18 +50,22 @@ def status_job():
             ]
         )
     } for i in j]
-    return render_template('job/job_res.html')
+    return render_template('job/job_res.html', items=l)
 
 
 @job.route('/job_res/<job_key>')
 def status_job(job_key):
-    job = Job.fetch(job_key, connection=create_app.conn)
-    print(job.get_id, job.is_finished, job.is_started)
-    if job.is_finished:
-        return str(job.result), 200
-    else:
-        return "Nay!", 202
-
-
-def r(a : int):
-    return list(range(a))
+    j1 = Job.fetch(job_key, connection=create_app.conn)
+    j2 = JobModel.query.filterby(jid=job_key)
+    if j1 and j2:
+        c = {
+            'res': j2.result,
+            'des': j2.description,
+            'job_id': job_key,
+            'date': j2.created,
+            'status': j1.is_finished,
+        }
+        return render_template('job/job_detail.html', item = c )
+    s = json.dumps({'error': 'Failed to get parameters'})
+    return make_response(s, 200,
+                         {'Content-Type': 'application/json'})
