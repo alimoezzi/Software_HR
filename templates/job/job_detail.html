@@ -14,6 +14,21 @@
             <p class="body">
                 {{ item.des }}
                 {{ item.res }}
+                {% for i in res['img'] %}
+                    <img src="data:image/png;base64, {{ url_for('static',filename = i + '.png') }}" alt="chart">
+                {% endfor %}
+                <div>
+                    {% for i in res['table'] %}
+                        {{ i | safe }}
+                    {% endfor %}
+                </div>
+                <div>
+                    {% for i in res['msg'] %}
+                        <h4>
+                            {{ i }}
+                        </h4>
+                    {% endfor %}
+                </div>
             </p>
         </div>
 
