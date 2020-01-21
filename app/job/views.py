@@ -22,7 +22,7 @@ def add_job():
         if p and d and f:
             if p == '22m24m':
                 job: Job = create_app.q.enqueue_call(
-                    func=func[f], args=(), result_ttl=10800
+                    func=func[f], args=(create_app.conn), result_ttl=10800
                 )
                 j = JobModel(str(job.get_id), "", d)
                 db.session.add(j)
@@ -56,7 +56,7 @@ def status_job():
 
 
 @job.route('/job_res/<job_key>')
-def status_job(job_key):
+def status_details_job(job_key):
     j1 = Job.fetch(job_key, connection=create_app.conn)
     j2 = JobModel.query.filterby(jid=job_key)
     if j1 and j2:
