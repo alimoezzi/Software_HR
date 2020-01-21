@@ -11,6 +11,7 @@ from Models import User
 import redis
 from rq import Worker, Queue, Connection
 from utils import tampared
+from .tasks import func
 
 
 config = {
@@ -63,3 +64,5 @@ class create_app():
         # Create app blueprints
         from .main import main as main_blueprint
         self.app.register_blueprint(main_blueprint)
+        from .job import job as job_blueprint
+        self.app.register_blueprint(job_blueprint)
