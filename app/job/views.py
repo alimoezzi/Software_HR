@@ -24,7 +24,9 @@ def add_job():
                 job: Job = create_app.q.enqueue_call(
                     func=func[f], args=(), result_ttl=10800
                 )
-                JobModel(str(job.get_id),"",d)
+                j = JobModel(str(job.get_id), "", d)
+                db.session.add(j)
+                db.session.commit()
                 s = json.dumps({'Result': 'Success'})
                 return make_response(s, 200,
                                      {'Content-Type': 'application/json'})
@@ -37,10 +39,10 @@ def add_job():
 def status_job():
     j = JobModel.query.all()
     l = [{
-        'job_id':j.jid,
-        'date':j.created,
-        'des':j.description,
-        'status':' '.join(
+        'job_id': j.jid,
+        'date': j.created,
+        'des': j.description,
+        'status': ' '.join(
             [
                 Job.fetch(j.jid, connection=create_app.conn).is_started,
                 Job.fetch(j.jid, connection=create_app.conn).is_finished,
@@ -65,7 +67,7 @@ def status_job(job_key):
             'date': j2.created,
             'status': j1.is_finished,
         }
-        return render_template('job/job_detail.html', item = c )
+        return render_template('job/job_detail.html', item=c)
     s = json.dumps({'error': 'Failed to get parameters'})
     return make_response(s, 200,
                          {'Content-Type': 'application/json'})
