@@ -20,6 +20,8 @@ def index():
 def status():
     return jsonify({'message': 'ok'}), 200\
 
+
+
 @main.route('/status/<job_key>')
 def status_job(job_key):
     job = Job.fetch(job_key, connection=create_app.conn)
