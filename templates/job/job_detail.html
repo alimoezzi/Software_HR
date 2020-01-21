@@ -2,7 +2,6 @@
 
 {% block con %}
     <h1 class="title">Job Result</h1>
-    {% for item in items %}
         <div>
             <div class="heads">
                 <div>
@@ -14,8 +13,8 @@
             <hr style="border: 3px solid #333;">
             <p class="body">
                 {{ item.des }}
+                {{ item.res }}
             </p>
         </div>
-    {% endfor %}
 
 {% endblock %}
