@@ -31,7 +31,7 @@ def is_blacklisted(jti):
 class create_app():
     app = Flask(__name__, root_path=os.path.abspath(os.path.join(".")))
     cors = CORS(app)
-    migrate = Migrate(app, db)
+    migrate = Migrate(app, db, compare_type=True)
     heroku = Heroku(app)
     env = os.getenv("ENV")
     app.config.from_object(config.get(env))
