@@ -7,7 +7,7 @@ from flask_migrate import Migrate
 from flask_heroku import Heroku
 from flask_script import Manager, Shell
 from Models import db, guard
-from Models import User
+from Models import *
 import redis
 from rq import Worker, Queue, Connection
 from utils import tampared
