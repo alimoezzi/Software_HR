@@ -8,9 +8,9 @@ class OrigRepos(db.Model):
     star = db.Column(db.Integer(), nullable=True)
     open_issue = db.Column(db.Integer(), nullable=True)
     name = db.Column(db.String(50), nullable=False)
-    description = db.Column(db.Text(300), nullable=True)
+    description = db.Column(db.Text(), nullable=True)
     comfork = db.Column(db.Boolean, default=False, server_default='false')
-    fork = db.Column(db.Integer(), db.ForeignKey('orig_repost.uid',onupdate="SET NULL", ondelete="SET NULL"), nullable=True)
+    fork = db.Column(db.Integer(), db.ForeignKey('orig_repos.uid',onupdate="SET NULL", ondelete="SET NULL"), nullable=True)
     tags = db.relationship('Repo_Tag', back_populates='repo', passive_deletes=False, cascade="save-update, merge")
 
     def __init__(self, gid: int, star: int, open_issue: int, name: str, description: str, comfork: bool,fork=None):

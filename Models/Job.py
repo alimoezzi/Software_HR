@@ -7,7 +7,7 @@ class Job(db.Model):
     jid = db.Column(db.String(100), primary_key=True)
     result = db.Column(db.Text(), nullable=True)
     created = db.Column(db.DateTime())
-    description = db.Column(db.Text(300), nullable=False)
+    description = db.Column(db.Text(), nullable=False)
 
     def __init__(self,jid: str, result: str, description: str):
         self.jid = jid

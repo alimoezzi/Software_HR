@@ -6,7 +6,7 @@ class Software(db.Model):
     uid = db.Column(db.Integer(), primary_key=True, autoincrement=True)
     version = db.Column(db.Float(), nullable=True)
     pkgname = db.Column(db.String(50), nullable=False)
-    repo_id = db.Column(db.Integer(), db.ForeignKey('orig_repost.uid',onupdate="SET NULL", ondelete="SET NULL"), nullable=True)
+    repo_id = db.Column(db.Integer(), db.ForeignKey('orig_repos.uid',onupdate="SET NULL", ondelete="SET NULL"), nullable=True)
 
     def __init__(self,pkgname: str, repo_id=None):
         self.pkgname = pkgname
