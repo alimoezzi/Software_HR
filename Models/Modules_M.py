@@ -9,8 +9,7 @@ class Modules_Modules(db.Model):
                        nullable=False)
     modules2_id = db.Column(db.Integer(), db.ForeignKey('modules.uid', onupdate="SET NULL", ondelete="SET NULL"),
                         nullable=False)
-    modules1 = db.relationship("Modules", back_populates="mdep1")
-    modules2 = db.relationship("Modules", back_populates="mdep2")
+    modules = db.relationship("Modules", back_populates="dep", foreign_keys='Modules_Modules.modules1_id')
     deprate = db.Column(db.Float(), nullable=True)
     dep_cat = db.Column(db.String(50), nullable=False)
 

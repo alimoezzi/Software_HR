@@ -10,9 +10,8 @@ class Modules(db.Model):
     inlining_performance = db.Column(db.Integer(), nullable=True)
     name = db.Column(db.String(50), nullable=False)
     cat = db.Column(db.String(50), nullable=False)
-    language = db.Column(db.Text(300), nullable=True)
-    mdep1 = db.relationship('Modules_Modules', back_populates='modules1', passive_deletes=False, cascade="save-update, merge")
-    mdep2 = db.relationship('Modules_Modules', back_populates='modules2', passive_deletes=False, cascade="save-update, merge")
+    language = db.Column(db.Text(), nullable=True)
+    dep = db.relationship('Modules_Modules', back_populates='modules', passive_deletes=False, cascade="save-update, merge", foreign_keys='Modules_Modules.modules2_id')
 
     def __init__(self, sid: int, security_issues: int, name: str, performance: int, inlining_performance: int, cat: str,language: str):
         self.sid = sid
