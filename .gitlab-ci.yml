@@ -85,6 +85,7 @@ run_tests:
     - pip3 install psycopg2-binary
     - pip3 install gunicorn
     - pip3 install -r requirements.txt
+    - pg_createcluster 9.6 main
     - service postgresql start && su postgres -c "psql --command \"ALTER USER postgres with password 'postgres';\" "
     - echo "host all  all    0.0.0.0/0  trust" >> ${PG_HOME}/${PG_VERSION}/main/pg_hba.conf
     - echo "host all  all    localhost  trust" >> ${PG_HOME}/${PG_VERSION}/main/pg_hba.conf
@@ -92,7 +93,6 @@ run_tests:
     - echo "local all  all      trust" >> ${PG_HOME}/${PG_VERSION}/main/pg_hba.conf
     - echo "listen_addresses = '*'" >> ${PG_HOME}/${PG_VERSION}/main/postgresql.conf
     - echo "port = 5432" >> ${PG_HOME}/${PG_VERSION}/main/postgresql.conf
-    - pg_createcluster 9.6 main
     - pg_ctlcluster 9.6 main restart
     - service postgresql restart
     - export PGPASSWORD='postgres'
