@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, jsonify
 from rq import Queue
-from rq.job import Job
+from rq.job import Job as JobRQ
 from app import *
 
 main = Blueprint('main', __name__)
@@ -24,7 +24,7 @@ def status():
 
 @main.route('/status/<job_key>')
 def status_job(job_key):
-    job = Job.fetch(job_key, connection=create_app.conn)
+    job = JobRQ.fetch(job_key, connection=create_app.conn)
     print(job.get_id, job.is_finished, job.is_started)
     if job.is_finished:
         return str(job.result), 200
