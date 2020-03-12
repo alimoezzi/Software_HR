@@ -71,7 +71,7 @@ run_tests:
     - locale-gen en_US.UTF-8
     - apt-get -yq update && apt-get install -y gnupg2
     - apt-get -yq install libffi6 libffi-dev
-    - apt-get -yq install software-properties-common git curl
+    - apt-get -yq install software-properties-common git curl apt-utils
     - add-apt-repository ppa:deadsnakes/ppa -y
     - apt-get -yq update
     - apt-get -yq install wget postgresql-server-dev-all
