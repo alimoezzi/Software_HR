@@ -74,6 +74,7 @@ run_tests:
     - apt-get -yq install software-properties-common git curl apt-utils
     - add-apt-repository ppa:deadsnakes/ppa -y
     - apt-get -yq update
+    - export PGPORT=5432
     - apt-get -yq install wget postgresql-server-dev-all
     - apt-get -yq install python3.6 redis-server
     - apt-get -yq install python3.6-dev
