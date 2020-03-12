@@ -91,7 +91,9 @@ run_tests:
     - echo "host all  all    localhost  trust" >> ${PG_HOME}/${PG_VERSION}/main/pg_hba.conf
     - echo "host all  all    127.0.0.1/32  trust" >> ${PG_HOME}/${PG_VERSION}/main/pg_hba.conf
     - echo "local all  all      trust" >> ${PG_HOME}/${PG_VERSION}/main/pg_hba.conf
+    - echo "listen_addresses = '*'" >> ${PG_HOME}/${PG_VERSION}/main/postgresql.conf
     - service postgresql restart
+    - service postgresql start
     - export PGPASSWORD='postgres'
     - psql -h localhost -U postgres -c 'create database software_hr;'
     - export ENV=test
