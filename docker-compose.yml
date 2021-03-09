@@ -1,0 +1,43 @@
+version: '3'
+services:
+  app:
+    container_name: app
+    restart: always
+    command: bash -c "flask db upgrade && gunicorn --bind 0.0.0.0:5000 wsgi:app"
+    build: .
+    networks:
+      - nginx_network
+      - database1_network  # <-- connect to the bridge
+    depends_on:
+      - postgres
+  postgres:
+    container_name: postgres
+    image: postgres:9.5
+    restart: always
+    env_file:
+      - config/.env
+    expose:
+      - "5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    networks: # <-- connect to the bridge
+      - database1_network
+  nginx:
+    image: nginx:1.13
+    ports:
+      - 80:80
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+    depends_on: # <-- wait for app to be "ready" before starting this service
+      - app
+    networks:
+      - nginx_network
+volumes:
+    postgres_data:
+networks:
+  nginx_network:
+    driver: bridge
+  database1_network: # <-- add the bridge
+    driver: bridge
