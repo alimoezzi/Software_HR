@@ -1,14 +1,5 @@
 # Software-HR
 
-Based on https://github.com/rwieruch/minimal-react-webpack-babel-setup
-
-## Run Locally
-
-1. Clone this repo: `git clone git@github.com:jwkvam/minimal-flask-react.git`
-2. npm install
-3. npm run dev
-4. pip install -r requirements.txt
-5. python server.py
-6. Goto http://localhost:3000
-
-If you would like to have webpack rebuild your javascript any time your React code changes, enter `npm run start` in a different terminal.
+A task queue service implemented using reddit and flask
+CI/CD using `gitlab-ci` and test using  python `unittest` and deploy to AWS using terraform
+terraform file includes 2 t2.micro load-balanced using elb
