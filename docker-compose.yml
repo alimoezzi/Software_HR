@@ -5,6 +5,10 @@ services:
     restart: always
     command: bash -c "flask db upgrade && ((python server.py run_worker)&) && gunicorn --bind 0.0.0.0:5000 wsgi:app"
     build: .
+    environment:
+      - ENV=dev
+    env_file:
+      - config/.env
     networks:
       - nginx_network
       - database1_network  # <-- connect to the bridge
