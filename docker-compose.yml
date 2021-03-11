@@ -32,6 +32,20 @@ services:
     depends_on:
       - postgres
       - redis
+  terraform:
+    command: terraform apply -auto-approve
+    environment: 
+      aws_access_key_id: $aws_access_key_id
+      aws_secret_access_key: $aws_secret_access_key
+      aws_region: us-east-2
+      aws_default_region: us-east-2
+    build:
+      context: .
+      dockerfile: terraform.dockerfile
+    volumes:
+      - type: volume
+        source: ./
+        target: /app
   postgres:
     container_name: postgres
     image: postgres:9.5
