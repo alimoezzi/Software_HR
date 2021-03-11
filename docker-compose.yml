@@ -8,8 +8,10 @@ services:
     networks:
       - nginx_network
       - database1_network  # <-- connect to the bridge
+      - redis1_network
     depends_on:
       - postgres
+      - redis
   postgres:
     container_name: postgres
     image: postgres:9.5
@@ -36,8 +38,11 @@ services:
       - nginx_network
 volumes:
     postgres_data:
+    redis_data:
 networks:
   nginx_network:
     driver: bridge
   database1_network: # <-- add the bridge
+    driver: bridge
+  redis1_network: # <-- add the bridge
     driver: bridge
