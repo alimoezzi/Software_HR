@@ -12,6 +12,22 @@ services:
     depends_on:
       - postgres
       - redis
+  test:
+    container_name: app
+    restart: always
+    command: bash -c "flask db upgrade && python tests/basic_tests.py"
+    build: .
+    environment:
+      - ENV=test
+    env_file:
+      - config/.env
+    networks:
+      - nginx_network
+      - database1_network  # <-- connect to the bridge
+      - redis1_network
+    depends_on:
+      - postgres
+      - redis
   postgres:
     container_name: postgres
     image: postgres:9.5
