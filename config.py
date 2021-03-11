@@ -18,8 +18,8 @@ class Development(BaseConfig):
     DEBUG = True
     TESTING = False
     ENV = 'dev'
-    SQLALCHEMY_DATABASE_URI = 'postgres://postgres:postgres@localhost:5432/software_hr'
-    REDIS_URL = 'redis://:8961@localhost:6379/0'
+    SQLALCHEMY_DATABASE_URI = 'postgres://postgres:postgres@postgres:5432/software_hr'
+    REDIS_URL = 'redis://:redis@redis:6379/0'
     listen = ['default']
 
 
@@ -30,8 +30,8 @@ class Production(BaseConfig):
     DEBUG = False
     TESTING = False
     ENV = 'production'
-    SQLALCHEMY_DATABASE_URI = 'postgres://postgres:postgres@localhost:5432/software_hr'
-    REDIS_URL = 'redis://:8961@localhost:6379/0'
+    SQLALCHEMY_DATABASE_URI = 'postgres://postgres:postgres@postgres:5432/software_hr'
+    REDIS_URL = 'redis://:redis@redis:6379/0'
     listen = ['default']
 
 
@@ -42,8 +42,8 @@ class Testing(BaseConfig):
     DEBUG = False
     TESTING = True
     ENV = 'testing'
-    SQLALCHEMY_DATABASE_URI = 'postgres://postgres:postgres@localhost:5432/software_hr'
-    REDIS_URL = 'redis://:8961@localhost:6379/0'
+    SQLALCHEMY_DATABASE_URI = 'postgres://postgres:postgres@postgres:5432/software_hr'
+    REDIS_URL = 'redis://:redis@redis:6379/0'
     listen = ['default']
 
 
