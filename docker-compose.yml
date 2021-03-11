@@ -36,6 +36,20 @@ services:
       - app
     networks:
       - nginx_network
+  redis:
+    image: redis:4.0
+    env_file:
+      - config/.env
+    container_name: redis
+    command: bash -c "redis-server --requirepass $REDIS_PASSWORD --appendonly yes"
+    expose:
+      - "6379"
+    ports:
+      - "6379:6379"
+    networks:
+      - redis1_network
+    volumes: 
+      - redis_data:/var/lib/redis/
 volumes:
     postgres_data:
     redis_data:
