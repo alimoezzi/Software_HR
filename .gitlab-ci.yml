@@ -1,134 +1,40 @@
-image: gotfix/postgresql:latest
-
+image: docker
+services:
+  - docker:dind
 stages:
-  - ver
   - init
   - tests
   - deploy
-
-ver:
-  stage: ver
-  script:
-    - export DEBIAN_FRONTEND=noninteractive
-    - apt-get -yq update && apt-get install -y gnupg2
-    - apt-get -yq install libffi6 libffi-dev
-    - apt-get -yq install software-properties-common git curl
-    - add-apt-repository ppa:deadsnakes/ppa -y
-    - apt-get -yq update
-    - apt-get -yq install wget
-    - apt-get -yq install python3.6
-    - apt-get -yq install python3.6-dev
-    - apt-get -yq install python3.6-venv
-    - wget https://bootstrap.pypa.io/get-pip.py
-    - python3.6 get-pip.py
-    - ln -s /usr/bin/python3.6 /usr/local/bin/python3
-    - ln -s /usr/bin/python3.6 /usr/local/bin/python
-    - python --version
-    - whoami
-
-variables:
-  PYTHONPATH: .
-  FLASK_APP: server
-
 init:
   stage: init
   script:
-    - export DEBIAN_FRONTEND=noninteractive
-    - apt-get -yq update --fix-missing && apt-get -yq install locales cmake gcc clang gdb build-essential
-    - export LANG=en_US.UTF-8
-    - export LC_CTYPE=en_US.UTF-8
-    - export LANGUAGE=en_US:en
-    - export LC_ALL=en_US.UTF-8
-    - locale-gen en_US.UTF-8
-    - apt-get -yq update && apt-get install -y gnupg2
-    - apt-get -yq install libffi6 libffi-dev
-    - apt-get -yq install software-properties-common git curl
-    - add-apt-repository ppa:deadsnakes/ppa -y
-    - apt-get -yq update
-    - apt-get -yq install wget postgresql-server-dev-all
-    - apt-get -yq install python3.6 redis-server
-    - apt-get -yq install python3.6-dev
-    - apt-get -yq install python3.6-venv
-    - wget https://bootstrap.pypa.io/get-pip.py
-    - python3.6 get-pip.py
-    - ln -s /usr/bin/python3.6 /usr/local/bin/python3
-    - ln -s /usr/bin/python3.6 /usr/local/bin/python
-    - pip3 install psycopg2-binary
-    - pip3 install gunicorn
-    - pip3 install -r requirements.txt
-    - echo "supervised systemd" >> /etc/redis/redis.conf
-    - service redis-server restart
-
+    - apk add --no-cache docker-compose
+    - docker-compose build
+    - whoami
 run_tests:
   stage: tests
   script:
-    - export DEBIAN_FRONTEND=noninteractive
-    - apt-get -yq update --fix-missing && apt-get -yq install locales cmake gcc clang gdb build-essential
-    - export LANG=en_US.UTF-8
-    - export LC_CTYPE=en_US.UTF-8
-    - export LANGUAGE=en_US:en
-    - export LC_ALL=en_US.UTF-8
-    - locale-gen en_US.UTF-8
-    - apt-get -yq update && apt-get install -y gnupg2
-    - apt-get -yq install libffi6 libffi-dev
-    - apt-get -yq install software-properties-common git curl apt-utils
-    - add-apt-repository ppa:deadsnakes/ppa -y
-    - apt-get -yq update
-    - export PGPORT=5432
-    - apt-get -yq install wget postgresql-server-dev-all
-    - apt-get -yq install python3.6 redis-server
-    - apt-get -yq install python3.6-dev
-    - apt-get -yq install python3.6-venv
-    - wget https://bootstrap.pypa.io/get-pip.py
-    - python3.6 get-pip.py
-    - ln -s /usr/bin/python3.6 /usr/local/bin/python3
-    - ln -s /usr/bin/python3.6 /usr/local/bin/python
-    - pip3 install psycopg2-binary
-    - pip3 install gunicorn
-    - pip3 install -r requirements.txt
-    - pg_createcluster 9.6 main
-    - service postgresql start && su postgres -c "psql --command \"ALTER USER postgres with password 'postgres';\" "
-    - echo "host all  all    0.0.0.0/0  trust" >> ${PG_HOME}/${PG_VERSION}/main/pg_hba.conf
-    - echo "host all  all    localhost  trust" >> ${PG_HOME}/${PG_VERSION}/main/pg_hba.conf
-    - echo "host all  all    127.0.0.1/32  trust" >> ${PG_HOME}/${PG_VERSION}/main/pg_hba.conf
-    - echo "local all  all      trust" >> ${PG_HOME}/${PG_VERSION}/main/pg_hba.conf
-    - echo "listen_addresses = '*'" >> ${PG_HOME}/${PG_VERSION}/main/postgresql.conf
-    - echo "port = 5432" >> ${PG_HOME}/${PG_VERSION}/main/postgresql.conf
-    - pg_ctlcluster 9.6 main restart
-    - service postgresql restart
-    - export PGPASSWORD='postgres'
-    - psql -h localhost -U postgres -c 'create database software_hr;'
-    - export ENV=test
-    - flask db upgrade
-    - python tests/basic_tests.py
-    - echo "supervised systemd" >> /etc/redis/redis.conf
-    - service redis-server restart
-
+    - apk add --no-cache docker-compose
+    - docker-compose build
+    - docker-compose up tests
 deploy_staging:
   stage: deploy
   script:
-    - export DEBIAN_FRONTEND=noninteractive
-    - apt-get -yq update --fix-missing && apt-get -yq install software-properties-common git curl
-    - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/software-hr.git
-    - git push heroku HEAD:master --force
-    - echo "Deployed to Staging Server https://software-hr.herokuapp.com/"
+    - apk add --no-cache docker-compose
+    - docker-compose build
+    - docker-compose up terraform
   environment:
     name: staging
-    url: https://software-hr.herokuapp.com/
   only:
     - master
-
 deploy_production:
   stage: deploy
   script:
-    - export DEBIAN_FRONTEND=noninteractive
-    - apt-get -yq update --fix-missing && apt-get -yq install software-properties-common git curl
-    - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/software-hr.git
-    - git push heroku HEAD:master --force
-    - echo "Deployed to Production Server https://software-hr.herokuapp.com/"
+    - apk add --no-cache docker-compose
+    - docker-compose build
+    - docker-compose up terraform
   environment:
     name: production
-    url: https://software-hr.herokuapp.com/
   when: manual
   only:
     - master
